@@ -59,6 +59,7 @@ require "mini.pick".setup()
 require "oil".setup()
 require "undotree".setup()
 require "mini.surround".setup()
+
 map('n', '<leader><leader>', ":Pick files<CR>")
 map('n', '<leader>/', ":Pick grep_live<CR>")
 map('n', '<leader>h', ":Pick help<CR>")
@@ -87,23 +88,25 @@ end, {
 map('n', '<leader>u', ":Undotree toggle<CR>", { silent = true })
 
 vim.lsp.config("lua_ls", {
-  settings = {
-    Lua = {
-      codeLens = { enable = true },
-      hint = { enable = true, semicolon = 'Disable' },
+	settings = {
+		Lua = {
+			codeLens = { enable = true },
+			hint = { enable = true, semicolon = 'Disable' },
 			diagnostics = {
 				globals = { "vim" },
 			},
 			workspace = { library = { vim.env.VIMRUNTIME }, },
 			checkThirdParty = false,
-    },
-  },
+		},
+	},
 })
 
-vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "ols"})
+vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "ols" })
 map('n', '<leader>lf', vim.lsp.buf.format)
 
+vim.diagnostic.config({ virtual_text = false, virtual_lines = { current_line = true }, })
 
+vim.g.diagnostics_active = true
 
 
 vim.cmd("colorscheme vague")
