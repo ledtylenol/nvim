@@ -8,6 +8,10 @@
       "rev": "d205d1741d1fcc1f3117b4e839bf00f74ad72fa2",
       "src": "https://github.com/nvim-mini/mini.surround"
     },
+    "nvim-lspconfig": {
+      "rev": "ead0f5f342d8d323441e7d4b88f0fc436a81ad5f",
+      "src": "https://github.com/neovim/nvim-lspconfig"
+    },
     "oil.nvim": {
       "rev": "0fcc83805ad11cf714a949c98c605ed717e0b83e",
       "src": "https://github.com/stevearc/oil.nvim"

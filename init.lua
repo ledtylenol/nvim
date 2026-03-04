@@ -50,6 +50,7 @@ vim.pack.add({
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/echasnovski/mini.pick" },
 	{ src = "https://github.com/jiaoshijie/undotree" },
+	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/nvim-mini/mini.surround" },
 })
 
@@ -85,7 +86,21 @@ end, {
 })
 map('n', '<leader>u', ":Undotree toggle<CR>", { silent = true })
 
-vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", })
+vim.lsp.config("lua_ls", {
+  settings = {
+    Lua = {
+      codeLens = { enable = true },
+      hint = { enable = true, semicolon = 'Disable' },
+			diagnostics = {
+				globals = { "vim" },
+			},
+			workspace = { library = { vim.env.VIMRUNTIME }, },
+			checkThirdParty = false,
+    },
+  },
+})
+
+vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "ols"})
 map('n', '<leader>lf', vim.lsp.buf.format)
 
 
