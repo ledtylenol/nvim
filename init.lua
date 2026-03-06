@@ -72,6 +72,7 @@ vim.pack.add({
 })
 
 
+
 require("luasnip.loaders.from_vscode").lazy_load()
 require "mini.pick".setup()
 require "mini.extra".setup()
@@ -90,7 +91,6 @@ require "blink.cmp".setup({
 		}
 	}
 })
-
 
 vim.g.OmniSharp_server_use_net6 = 1
 map('n', '<leader><leader>', ":Pick files<CR>")
@@ -173,7 +173,7 @@ vim.lsp.config('jdtls', {
 		}
 	}
 })
-vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "ols", "omnisharp", "jdtls", "cs" })
+vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "ols", "jdtls" })
 map('n', '<leader>lf', vim.lsp.buf.format)
 
 vim.diagnostic.config({ virtual_text = false, virtual_lines = { current_line = true }, })
