@@ -15,7 +15,7 @@ vim.o.undofile = true
 vim.o.termguicolors = true
 
 local map = vim.keymap.set
-local a = 'a'
+
 
 map('n', 'k', 'gkzz')
 map('n', 'j', 'gjzz')
@@ -32,38 +32,74 @@ map('n', '<leader>q', ':quit<CR>')
 map({ 'n', 'v', 'x' }, 'y', '"+y')
 map({ 'n', 'v', 'x' }, 'p', '"+p')
 map({ 'n', 'v', 'x' }, 'd', '"+d')
+map({ 'n', 'v', 'x' }, 'c', '"+c')
 
---autocomplete
-vim.api.nvim_create_autocmd('LspAttach', {
-	callback = function(ev)
-		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-		if client:supports_method('textDocument/completion') then
-			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
-		end
-	end,
-})
 
-vim.cmd("set completeopt+=noselect")
 
 vim.pack.add({
 	{ src = "https://github.com/vague2k/vague.nvim" },
 	{ src = "https://github.com/stevearc/oil.nvim" },
-	{ src = "https://github.com/echasnovski/mini.pick" },
+	{ src = "https://github.com/nvim-mini/mini.pick" },
+	{ src = "https://github.com/nvim-mini/mini.extra" },
+	{ src = "https://github.com/nvim-mini/mini.completion" },
+	{ src = "https://github.com/nvim-mini/mini.snippets" },
 	{ src = "https://github.com/jiaoshijie/undotree" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/nvim-mini/mini.surround" },
+	{ src = "https://github.com/seblyng/roslyn.nvim" },
+	{ src = "https://github.com/Hoffs/omnisharp-extended-lsp.nvim" },
+	{ src = "https://github.com/stevearc/conform.nvim" },
+	{ src = "https://github.com/L3MON4D3/LuaSnip" },
+	{ src = "https://github.com/rafamadriz/friendly-snippets" },
+	{
+		src = "https://github.com/saghen/blink.cmp",
+		version = vim.version.range("*"),
+	},
+})
+vim.pack.add({
+	{
+		src = 'https://github.com/JavaHello/spring-boot.nvim',
+		version = '218c0c26c14d99feca778e4d13f5ec3e8b1b60f0',
+	},
+	'https://github.com/MunifTanjim/nui.nvim',
+	'https://github.com/mfussenegger/nvim-dap',
+
+	'https://github.com/nvim-java/nvim-java',
+})
+
+vim.pack.add({
+	"https://github.com/rachartier/tiny-code-action.nvim",
 })
 
 
+require("luasnip.loaders.from_vscode").lazy_load()
 require "mini.pick".setup()
+require "mini.extra".setup()
 require "oil".setup()
 require "undotree".setup()
 require "mini.surround".setup()
+require "conform".setup()
+require "java".setup()
+require "tiny-code-action".setup()
+require "roslyn".setup()
+require "blink.cmp".setup({
+	fuzzy = {
+		implementation = "rust",
+		prebuilt_binaries = {
+			download = true,
+		}
+	}
+})
 
+
+vim.g.OmniSharp_server_use_net6 = 1
 map('n', '<leader><leader>', ":Pick files<CR>")
 map('n', '<leader>/', ":Pick grep_live<CR>")
 map('n', '<leader>h', ":Pick help<CR>")
 map('n', '<leader>e', ":Oil<CR>")
+map({ "n", "x", "v" }, "<leader>ca", function()
+	require("tiny-code-action").code_action()
+end, { noremap = true, silent = true })
 
 vim.api.nvim_create_user_command('Undotree', function(opts)
 	local args = opts.fargs
@@ -101,7 +137,22 @@ vim.lsp.config("lua_ls", {
 	},
 })
 
-vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "ols" })
+vim.lsp.config('jdtls', {
+	settings = {
+		java = {
+			configuration = {
+				runtimes = {
+					{
+						name = "JavaSE-21",
+						path = "/opt/jdk-21",
+						default = true,
+					}
+				}
+			}
+		}
+	}
+})
+vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "ols", "omnisharp", "jdtls", "cs" })
 map('n', '<leader>lf', vim.lsp.buf.format)
 
 vim.diagnostic.config({ virtual_text = false, virtual_lines = { current_line = true }, })
