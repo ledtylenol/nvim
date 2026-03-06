@@ -41,13 +41,10 @@ vim.pack.add({
 	{ src = "https://github.com/stevearc/oil.nvim" },
 	{ src = "https://github.com/nvim-mini/mini.pick" },
 	{ src = "https://github.com/nvim-mini/mini.extra" },
-	{ src = "https://github.com/nvim-mini/mini.completion" },
-	{ src = "https://github.com/nvim-mini/mini.snippets" },
 	{ src = "https://github.com/jiaoshijie/undotree" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/nvim-mini/mini.surround" },
 	{ src = "https://github.com/seblyng/roslyn.nvim" },
-	{ src = "https://github.com/Hoffs/omnisharp-extended-lsp.nvim" },
 	{ src = "https://github.com/stevearc/conform.nvim" },
 	{ src = "https://github.com/L3MON4D3/LuaSnip" },
 	{ src = "https://github.com/rafamadriz/friendly-snippets" },
@@ -92,7 +89,6 @@ require "blink.cmp".setup({
 	}
 })
 
-vim.g.OmniSharp_server_use_net6 = 1
 map('n', '<leader><leader>', ":Pick files<CR>")
 map('n', '<leader>/', ":Pick grep_live<CR>")
 map('n', '<leader>h', ":Pick help<CR>")
