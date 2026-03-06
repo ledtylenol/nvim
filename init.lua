@@ -1,4 +1,6 @@
 vim.o.winborder = "double"
+vim.o.guifont = "Cascadia Code"
+vim.o.guifontwide = "Cascadia Code"
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.wrap = false
@@ -169,7 +171,7 @@ vim.lsp.config('jdtls', {
 		}
 	}
 })
-vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "ols", "jdtls" })
+vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "ols", "jdtls", "jsonls" })
 map('n', '<leader>lf', vim.lsp.buf.format)
 
 vim.diagnostic.config({ virtual_text = false, virtual_lines = { current_line = true }, })
