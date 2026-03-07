@@ -54,6 +54,7 @@ vim.pack.add({
 		src = "https://github.com/saghen/blink.cmp",
 		version = vim.version.range("*"),
 	},
+	{ src = 'https://codeberg.org/ziglang/zig.vim' }
 })
 vim.pack.add({
 	{
@@ -90,6 +91,7 @@ require "blink.cmp".setup({
 		}
 	}
 })
+
 
 map('n', '<leader><leader>', ":Pick files<CR>")
 map('n', '<leader>/', ":Pick grep_live<CR>")
@@ -171,7 +173,7 @@ vim.lsp.config('jdtls', {
 		}
 	}
 })
-vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "ols", "jdtls", "jsonls" })
+vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "jdtls", "jsonls", "zls" })
 map('n', '<leader>lf', vim.lsp.buf.format)
 
 vim.diagnostic.config({ virtual_text = false, virtual_lines = { current_line = true }, })
