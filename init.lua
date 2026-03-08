@@ -54,7 +54,10 @@ vim.pack.add({
 		src = "https://github.com/saghen/blink.cmp",
 		version = vim.version.range("*"),
 	},
-	{ src = 'https://codeberg.org/ziglang/zig.vim' }
+	{ src = 'https://codeberg.org/ziglang/zig.vim' },
+	{ src = "https://github.com/jezda1337/nvim-html-css" },
+	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter' }
+
 })
 vim.pack.add({
 	{
@@ -91,6 +94,7 @@ require "blink.cmp".setup({
 		}
 	}
 })
+require("html-css").setup({})
 
 
 map('n', '<leader><leader>', ":Pick files<CR>")
@@ -158,6 +162,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		end
 	end,
 })
+
 vim.lsp.config('jdtls', {
 	settings = {
 		java = {
@@ -173,7 +178,7 @@ vim.lsp.config('jdtls', {
 		}
 	}
 })
-vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "jdtls", "jsonls", "zls" })
+vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "jdtls", "jsonls", "zls", "vtsls", "html", "css" })
 map('n', '<leader>lf', vim.lsp.buf.format)
 
 vim.diagnostic.config({ virtual_text = false, virtual_lines = { current_line = true }, })
@@ -183,3 +188,4 @@ vim.g.diagnostics_active = true
 
 vim.cmd("colorscheme vague")
 vim.cmd(":hi statusline guibg=NONE")
+vim.cmd(":TSInstall css")
