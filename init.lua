@@ -55,7 +55,6 @@ vim.pack.add({
 		version = vim.version.range("*"),
 	},
 	{ src = 'https://codeberg.org/ziglang/zig.vim' },
-	{ src = "https://github.com/jezda1337/nvim-html-css" },
 	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter' }
 
 })
@@ -94,7 +93,6 @@ require "blink.cmp".setup({
 		}
 	}
 })
-require("html-css").setup({})
 
 
 map('n', '<leader><leader>', ":Pick files<CR>")
@@ -178,7 +176,8 @@ vim.lsp.config('jdtls', {
 		}
 	}
 })
-vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "jdtls", "jsonls", "zls", "vtsls", "html", "css" })
+vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "jdtls", "jsonls", "zls", "vtsls", "html", "cssls",
+	"cssmodules_ls" })
 map('n', '<leader>lf', vim.lsp.buf.format)
 
 vim.diagnostic.config({ virtual_text = false, virtual_lines = { current_line = true }, })
@@ -188,4 +187,3 @@ vim.g.diagnostics_active = true
 
 vim.cmd("colorscheme vague")
 vim.cmd(":hi statusline guibg=NONE")
-vim.cmd(":TSInstall css")
