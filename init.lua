@@ -53,8 +53,8 @@ vim.pack.add({
 		version = vim.version.range("*"),
 	},
 	{ src = 'https://codeberg.org/ziglang/zig.vim' },
-	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter' }
-
+	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
+	{ src = 'https://github.com/joshzcold/python.nvim' }
 })
 vim.pack.add({
 	{
@@ -83,6 +83,7 @@ require "conform".setup()
 require "java".setup()
 require "tiny-code-action".setup()
 require "roslyn".setup()
+require "python".setup()
 require "blink.cmp".setup({
 	fuzzy = {
 		implementation = "rust",
@@ -174,8 +175,10 @@ vim.lsp.config('jdtls', {
 		}
 	}
 })
+
+vim.lsp.config("python", {})
 vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "jdtls", "jsonls", "zls", "vtsls", "html", "cssls",
-	"cssmodules_ls" })
+	"cssmodules_ls", "python" })
 map('n', '<leader>lf', vim.lsp.buf.format)
 
 vim.diagnostic.config({ virtual_text = false, virtual_lines = { current_line = true }, })
