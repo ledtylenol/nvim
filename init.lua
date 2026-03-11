@@ -1,6 +1,4 @@
 vim.o.winborder = "double"
-vim.o.guifont = "Cascadia Code"
-vim.o.guifontwide = "Cascadia Code"
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.wrap = false
