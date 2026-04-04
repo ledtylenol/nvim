@@ -17,6 +17,7 @@ vim.o.termguicolors = true
 local map = vim.keymap.set
 
 
+-- basic binds
 map('n', 'k', 'gkzz')
 map('n', 'j', 'gjzz')
 
@@ -25,23 +26,28 @@ map('n', '<C-d>', '<C-d>zz')
 map('n', ' ', '<NOP>')
 
 
+-- file utils
 map('n', '<leader>o', ':update<CR> :source<CR>')
 map('n', '<leader>w', ':write<CR>')
 map('n', '<leader>q', ':quit<CR>')
 
+-- clipboard utils
 map({ 'n', 'v', 'x' }, 'y', '"+y')
 map({ 'n', 'v', 'x' }, 'p', '"+p')
 map({ 'n', 'v', 'x' }, 'd', '"+d')
 map({ 'n', 'v', 'x' }, 'c', '"+c')
 
+-- window utils
 map('n', '<C-h>', '<C-w><C-h>')
 map('n', '<C-j>', '<C-w><C-j>')
 map('n', '<C-l>', '<C-w><C-l>')
 map('n', '<C-k>', '<C-w><C-k>')
 
+-- search utils
 map('n', 'n', 'nzzzv')
 map('n', 'N', 'Nzzzv')
 
+-- term utils
 map('n', '<leader>ft', ':below term<CR>i')
 map('t', '<ESC>', '<C-\\><C-n>')
 
@@ -103,6 +109,7 @@ require "blink.cmp".setup({
 })
 
 
+-- plugin utils
 map('n', '<leader><leader>', ":Pick files<CR>")
 map('n', '<leader>/', ":Pick grep_live<CR>")
 map('n', '<leader>h', ":Pick help<CR>")
@@ -166,6 +173,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
 				end
 
 			})
+		end
+		-- set gd and gD if the lsp allows
+		if client:supports_method('textDocument/definition') then
+			map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
+		end
+		if client:supports_method('textDocument/declaration') then
+			map('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
 		end
 	end,
 })
