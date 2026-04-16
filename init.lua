@@ -65,6 +65,7 @@ vim.pack.add({
 	{ src = "https://github.com/stevearc/conform.nvim" },
 	{ src = "https://github.com/L3MON4D3/LuaSnip" },
 	{ src = "https://github.com/rafamadriz/friendly-snippets" },
+	{ src = "https://github.com/Johanw123/avalonia.nvim" },
 	{
 		src = "https://github.com/saghen/blink.cmp",
 		version = vim.version.range("*"),
@@ -108,6 +109,21 @@ require "blink.cmp".setup({
 	}
 })
 
+vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+	pattern = { "*.axaml" },
+	callback = function(event)
+		vim.lsp.start {
+			name = "avalonia",
+			cmd = { "avalonia-ls" },
+			root_dir = vim.fn.getcwd(),
+		}
+	end
+})
+vim.filetype.add({
+	extension = {
+		axaml = "xml",
+	},
+})
 
 -- plugin utils
 map('n', '<leader><leader>', ":Pick files<CR>")
@@ -201,8 +217,9 @@ vim.lsp.config('jdtls', {
 })
 
 vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "jdtls", "jsonls", "zls", "vtsls", "html", "cssls",
-	"cssmodules_ls", "ty", "ruff" })
+	"cssmodules_ls", "ty", "ruff", "lemminx" })
 map('n', '<leader>lf', vim.lsp.buf.format)
+-- map('n', '<leader>p', require("avalonia.nvim").open_preview())
 
 vim.diagnostic.config({ virtual_text = false, virtual_lines = { current_line = true }, })
 
