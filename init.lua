@@ -217,7 +217,7 @@ vim.lsp.config('jdtls', {
 })
 
 vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "jdtls", "jsonls", "zls", "vtsls", "html", "cssls",
-	"cssmodules_ls", "ty", "ruff", "lemminx" })
+	"cssmodules_ls", "ty", "ruff", "lemminx", "eslint" })
 map('n', '<leader>lf', vim.lsp.buf.format)
 -- map('n', '<leader>p', require("avalonia.nvim").open_preview())
 
