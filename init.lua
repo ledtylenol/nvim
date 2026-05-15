@@ -190,6 +190,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 			})
 		end
+	end,
+})
+
+vim.api.nvim_create_autocmd('LspAttach', {
+	callback = function(args)
+		-- Get the client
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+		if not client then
+			return
+		end
 		-- set gd and gD if the lsp allows
 		if client:supports_method('textDocument/definition') then
 			map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
@@ -199,7 +210,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		end
 	end,
 })
-
 vim.lsp.config('jdtls', {
 	settings = {
 		java = {
@@ -221,7 +231,7 @@ vim.lsp.enable({ "lua_ls", "rust_analyzer", "tinymist", "jdtls", "jsonls", "zls"
 map('n', '<leader>lf', vim.lsp.buf.format)
 -- map('n', '<leader>p', require("avalonia.nvim").open_preview())
 
-vim.diagnostic.config({ virtual_text = false, virtual_lines = { current_line = true }, })
+vim.diagnostic.config({ virtual_text = true })
 
 vim.g.diagnostics_active = true
 
